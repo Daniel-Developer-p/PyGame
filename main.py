@@ -31,10 +31,23 @@ while True:
     ball.x += v_ball * dx
     ball.y += v_ball * dy
 
-    key = pygame.key.get_pressed()
+    if ball.centerx < ball_radius or ball.centerx > width - ball_radius:
+        dx = -dx
+    if ball.centerx < ball_radius or ball.centerx > height - ball_radius:
+        dx = -dx
+
+    blocks = []
+    for j in range(5):
+        Y = 10+70*j
+        for i in range(10):
+            X = 10 + 120*i
+            bl = pygame.Rect(X, Y, 100, 50)
+            blocks.append(bl)
+
     if key[pygame.K_LEFT] and panel.left > 0:
         panel.left -= panel_speed
     if key[pygame.K_RIGHT] and panel.right < width:
         panel.right += panel_speed
     pygame.display.flip()
     clock.tick(60)
+
