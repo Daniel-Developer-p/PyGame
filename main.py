@@ -36,6 +36,9 @@ while True:
     if ball.centery < ball_radius or ball.centery > height - ball_radius:
         dy = -dy
 
+    if ball.colliderect(panel) and dy > 0:
+        dy = -dy
+
     blocks = []
     for j in range(5):
         Y = 10+70*j
@@ -44,10 +47,10 @@ while True:
             bl = pygame.Rect(X, Y, 100, 50)
             blocks.append(bl)
 
+    key = pygame.key.get_pressed()
     if key[pygame.K_LEFT] and panel.left > 0:
         panel.left -= panel_speed
     if key[pygame.K_RIGHT] and panel.right < width:
         panel.right += panel_speed
     pygame.display.flip()
     clock.tick(60)
-
