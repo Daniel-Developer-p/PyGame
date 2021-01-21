@@ -33,8 +33,8 @@ while True:
 
     if ball.centerx < ball_radius or ball.centerx > width - ball_radius:
         dx = -dx
-    if ball.centerx < ball_radius or ball.centerx > height - ball_radius:
-        dx = -dx
+    if ball.centery < ball_radius or ball.centery > height - ball_radius:
+        dy = -dy
 
     blocks = []
     for j in range(5):
