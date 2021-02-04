@@ -39,13 +39,14 @@ def collision(dx, dy, ball, block):
     else:
         delta_y = block.bottom - ball.top
 
-    if abs(delta_x, delta_y) < 10:
+    if abs(delta_x - delta_y) < 10:
         dx, dy = -dx, -dy
     elif delta_x > delta_y:
         dy = -dy
     elif delta_y > delta_x:
         dx = -dx
     return dx, dy
+
 
 
 while True:
@@ -56,6 +57,15 @@ while True:
     sc.fill(pygame.Color('black'))
     pygame.draw.rect(sc, pygame.Color('darkorange'), panel)
     pygame.draw.circle(sc, pygame.Color('yellow'), ball.center, ball_radius)
+
+    for i in range(len(blocks)):
+        pygame.draw.rect(sc, pygame.Color('#000000'), blocks[i])
+
+    flag = ball.collidelist(blocks)
+    if flag != -1:
+        del_block = blocks.pop(flag)
+        dx, dy = collision(dx, dy, ball, del_block)
+
     ball.x += v_ball * dx
     ball.y += v_ball * dy
 
